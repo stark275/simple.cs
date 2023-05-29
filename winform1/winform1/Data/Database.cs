@@ -28,7 +28,7 @@ namespace winform1.Data
 
             return datatable;
         }
-
+        
         public DataTable Login(string username, string password)
         {
             Connection.Open();
@@ -42,6 +42,25 @@ namespace winform1.Data
 
             return datatable;
         }
+
+
+        public DataTable LoginPerf(string username, string password)
+        {
+            using (this.Connection)
+            {
+                Connection.Open();
+                MySqlCommand cmd = new MySqlCommand("Select * from users where username = @Username and password = @Password", this.Connection);
+                cmd.Parameters.Add("@Username", MySqlDbType.VarChar, 225).Value = username;
+                cmd.Parameters.Add("@Password", MySqlDbType.VarChar, 225).Value = password;
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                DataTable datatable = new DataTable();
+                datatable.Load(dataReader);
+                
+                return datatable;
+            }
+        }
+
+
 
 
     }

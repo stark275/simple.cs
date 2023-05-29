@@ -34,7 +34,10 @@ namespace winform1
             //      "Select * from users where username = '{0}' and password = '{1}'", username, password
             //  ));
 
-            DataTable dt = database.Login(username, password);
+            // DataTable dt = database.Login(username, password);
+
+             DataTable dt = database.LoginPerf(username, password);
+
 
             if (dt.Rows.Count > 0)
             {
